@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import "glightbox/dist/css/glightbox.min.css";
 /**
  * Portfolio 컴포넌트
  * 
@@ -67,22 +67,50 @@ const Portfolio = () => {
   useEffect(() => {
     let cleanup: (() => void) | undefined;
 
-    // GLightbox 동적 import
-    import("glightbox").then(({ default: GLightbox }) => {
-      import("glightbox/dist/css/glightbox.min.css");
-      
-      // GLightbox 인스턴스 생성
-      const instance = GLightbox({
-        selector: ".glightbox",
-      });
-      
-      lightboxRef.current = instance;
-      cleanup = () => instance.destroy();
-    });
+    // GLightbox 동적 import 및 초기화
+    const initGLightbox = async () => {
+      try {
+        // GLightbox 모듈 동적 import
+        const GLightboxModule = await import("glightbox");
+        const GLightbox = GLightboxModule.default;
+
+        // DOM이 완전히 렌더링된 후 초기화
+        // 약간의 지연을 두어 DOM 요소가 준비되도록 함
+        setTimeout(() => {
+          // 기존 인스턴스가 있다면 제거
+          if (lightboxRef.current) {
+            lightboxRef.current.destroy();
+          }
+
+          // GLightbox 인스턴스 생성
+          const instance = GLightbox({
+            selector: ".glightbox",
+            touchNavigation: true,
+            loop: true,
+            autoplayVideos: true,
+          });
+
+          lightboxRef.current = instance;
+          cleanup = () => {
+            if (instance) {
+              instance.destroy();
+            }
+          };
+        }, 100);
+      } catch (error) {
+        console.error("GLightbox 초기화 실패:", error);
+      }
+    };
+
+    initGLightbox();
 
     // 클린업: 컴포넌트 언마운트 시 GLightbox 인스턴스 제거
     return () => {
-      if (cleanup) cleanup();
+      if (cleanup) {
+        cleanup();
+      } else if (lightboxRef.current) {
+        lightboxRef.current.destroy();
+      }
     };
   }, []);
 
@@ -91,7 +119,7 @@ const Portfolio = () => {
     <section id="portfolio" className="portfolio section">
       <div className="container" data-aos="fade-up">
         {/* 섹션 제목 */}
-        <div className="section-title">
+        <div className="services-title">
           <h2>브랜드 찾기</h2>
           <p>Brand Portfolio</p>
         </div>

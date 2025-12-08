@@ -30,7 +30,7 @@ const Hero = () => {
         <img 
           src="/assets/icons/graph_9818969.svg" 
           alt="F&B 개발 및 제조" 
-          className="mb-3 hero-icon w-[50px] h-[50px]"
+          className="mb-3 hero-icon w-[40px] h-[40px]"
         />
       ),
       delay: 400,

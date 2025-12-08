@@ -95,6 +95,39 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 10px;
 }
 
+.services-title h2 {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+  position: relative;
+  display: inline-block;
+}
+
+.services-title h2::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: var(--accent-color);
+  margin: 4px 10px;
+}
+
+.services-title p {
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  color: var(--heading-color);
+  margin-bottom: 60px;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 /* Container Customization for Bootstrap-like grid */
 @layer components {
   .container {
@@ -138,3 +171,10 @@ h1, h2, h3, h4, h5, h6 {
 .clients .swiper-pagination .swiper-pagination-bullet-active {
   background-color: #ffc451 !important;
 }
+
+/* Services Section 아이콘 색상 (#ffc451) */
+#services .service-icon {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(89%) saturate(1352%) hue-rotate(340deg) brightness(105%) contrast(101%) !important;
+  object-fit: contain;
+}
+

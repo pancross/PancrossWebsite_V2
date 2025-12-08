@@ -18,8 +18,8 @@ const About = () => {
           <div className="order-1 lg:order-1 w-[600px] h-[600px]">
             <div className="grid grid-cols-2 gap-4">
               {/* 상단 왼쪽: accent color 박스 */}
-              <div className="border-2 border-[#ffc451] rounded-lg aspect-square relative">
-                  <h2 className="!text-[#ffc451] font-bold text-2xl md:text-3xl leading-tight font-pretendard pt-49  pl-7">
+              <div className="bg-[#ffc451] rounded-lg aspect-square relative">
+                  <h2 className="!text-[#ffffff] font-bold text-2xl md:text-3xl leading-tight font-pretendard pt-49  pl-7">
                     ABOUT<br />US
                   </h2>
               </div>
