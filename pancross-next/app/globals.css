@@ -22,11 +22,6 @@
   --nav-dropdown-hover-color: #ffc451;
 }
 
-.light-background {
-  --background-color: #f9f9f9;
-  --surface-color: #ffffff;
-}
-
 .dark-background {
   --background-color: #060606;
   --default-color: #ffffff;
@@ -131,4 +126,15 @@ h1, h2, h3, h4, h5, h6 {
       max-width: 1320px;
     }
   }
+}
+
+/* Hero 아이콘 색상 적용 (골든/오렌지) */
+#hero .hero-icon {
+  filter: brightness(0) saturate(100%) invert(77%) sepia(89%) saturate(1352%) hue-rotate(340deg) brightness(105%) contrast(101%);
+  object-fit: contain;
+}
+
+/* Clients Section Pagination Bullet 색상 */
+.clients .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #ffc451 !important;
 }
