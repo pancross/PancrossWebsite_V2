@@ -2,7 +2,8 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { portfolioItems } from "@/features/landing/constants/portfolio";
 import "glightbox/dist/css/glightbox.min.css";
 /**
  * Portfolio 컴포넌트
@@ -14,50 +15,20 @@ import "glightbox/dist/css/glightbox.min.css";
  * - 반응형 그리드 레이아웃
  */
 const Portfolio = () => {
+  // ==================== Hooks ====================
+  /** Next.js 라우터 */
+  const router = useRouter();
+
   // ==================== Refs ====================
   /** GLightbox 인스턴스 참조 */
   const lightboxRef = useRef<any>(null);
 
   // ==================== 브랜드 포트폴리오 데이터 ====================
   /** 브랜드 포트폴리오 항목 목록 */
-  const items = [
-    {
-      title: "부산빨간어묵포차",
-      desc: "정통 길거리 음식의 새로운 기준",
-      img: "빨간어묵포차/emart.hanam.jpg",
-      link: "#",
-    },
-    {
-      title: "더 어",
-      desc: "프리미엄 어묵의 새로운 미식 경험",
-      img: "brandP/the uh/1.jpg",
-      link: "#",
-    },
-    {
-      title: "바다해어묵",
-      desc: "바다의 신선함을 담은 고품질 어묵",
-      img: "brandP/ocean/KakaoTalk_20250115_105712067_02.jpg",
-      link: "#",
-    },
-    {
-      title: "크로붕",
-      desc: "크로플과 붕어빵의 특별한 만남",
-      img: "brandP/croboong/1.jpg",
-      link: "#",
-    },
-    {
-      title: "한마리뚝닭",
-      desc: "수비드로 완성된 전기구이 치킨의 새로운 기준",
-      img: "brandP/hanmari/1.jpg",
-      link: "#",
-    },
-    {
-      title: "이포어묵",
-      desc: "전통과 품격이 담긴 수제 어묵",
-      img: "brandP/epo/2.jpg",
-      link: "#",
-    },
-  ];
+  const items = portfolioItems.map((item) => ({
+    ...item,
+    link: `/portfolio/${item.id}`,
+  }));
 
   // ==================== Side Effects ====================
   /**
@@ -127,10 +98,18 @@ const Portfolio = () => {
         {/* 포트폴리오 그리드 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" data-aos="fade-up" data-aos-delay="200">
           {items.map((item, index) => (
-            <div key={index} className="portfolio-item relative overflow-hidden group h-[300px]">
+            <div
+              key={index}
+              className="portfolio-item relative overflow-hidden group h-[300px] cursor-pointer"
+              onClick={() => {
+                if (item.link && item.link !== "#") {
+                  router.push(item.link);
+                }
+              }}
+            >
               {/* 브랜드 이미지 */}
               <Image
-                src={`/assets/image_J/${item.img}`}
+                src={`/assets/${item.img}`}
                 alt={item.title}
                 fill
                 className="object-cover transition-all duration-300 group-hover:scale-110"
@@ -147,22 +126,25 @@ const Portfolio = () => {
                 
                 {/* 이미지 확대 버튼 (GLightbox) */}
                 <a
-                  href={`/assets/image_J/${item.img}`}
+                  href={`/assets/${item.img}`}
                   title={item.title}
                   data-gallery="portfolio-gallery-app"
-                  className="glightbox preview-link absolute right-[50px] text-[24px] top-[calc(50%-14px)] text-default/70 hover:text-accent transition-colors duration-300"
+                  className="glightbox preview-link absolute right-[50px] text-[24px] top-[calc(50%-14px)] text-default/70 hover:text-accent transition-colors duration-300 z-10"
+                  onClick={(e) => {
+                    // 부모 div의 클릭 이벤트 막기
+                    e.stopPropagation();
+                  }}
                 >
                   <i className="bi bi-zoom-in"></i>
                 </a>
                 
                 {/* 상세 페이지 링크 */}
-                <Link
-                  href={item.link}
+                <div
                   title="More Details"
-                  className="details-link absolute right-[14px] text-[28px] top-[calc(50%-14px)] text-default/70 hover:text-accent transition-colors duration-300"
+                  className="details-link absolute right-[14px] text-[28px] top-[calc(50%-14px)] text-default/70 hover:text-accent transition-colors duration-300 pointer-events-none"
                 >
                   <i className="bi bi-link-45deg"></i>
-                </Link>
+                </div>
               </div>
             </div>
           ))}

@@ -89,7 +89,7 @@ const Contact = () => {
     <section id="contact" className="contact section">
       <div className="container" data-aos="fade-up">
         {/* 섹션 제목 */}
-        <div className="section-title">
+        <div className="services-title">
           <h2>Contact</h2>
           <p>Contact Us</p>
         </div>

@@ -178,3 +178,9 @@ h1, h2, h3, h4, h5, h6 {
   object-fit: contain;
 }
 
+/* Stats Section CountUp 숫자 색상 (accent 색상 강제 적용) */
+.stats .stats-item span,
+.stats .stats-item span > span {
+  color: var(--accent-color) !important;
+}
+

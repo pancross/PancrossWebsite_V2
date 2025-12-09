@@ -82,6 +82,7 @@ const Stats = () => {
                         duration={stat.duration}
                         enableScrollSpy
                         scrollSpyOnce
+                        className="text-accent"
                       />
                     </span>
                     
