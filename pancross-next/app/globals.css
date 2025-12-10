@@ -184,3 +184,9 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--accent-color) !important;
 }
 
+/* Contact Section 아이콘 배경색 강제 적용 */
+.contact .info-item > div:first-child {
+  background-color: var(--accent-color) !important;
+  color: var(--contrast-color) !important;
+}
+

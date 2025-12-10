@@ -53,7 +53,7 @@ const Stats = () => {
               alt="판크로스 통계 섹션 이미지"
               width={600}
               height={400}
-              className="img-fluid w-full h-auto object-cover"
+              className="img-fluid object-cover"
             />
           </div>
 

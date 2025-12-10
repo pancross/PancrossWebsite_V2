@@ -3,6 +3,7 @@ import "./globals.css";
 import "aos/dist/aos.css";
 import "swiper/css";
 import "swiper/css/pagination";
+import "bootstrap-icons/font/bootstrap-icons.css";
 import AosInit from "@/components/common/AosInit";
 
 /**
